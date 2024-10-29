@@ -97,9 +97,11 @@ const AppIconPicker: FC<AppIconPickerProps> = ({
         handleLocalFileUpload(uploadImageInfo.file)
         return
       }
-      const blob = await getCroppedImg(imageCropInfo.tempUrl, imageCropInfo.croppedAreaPixels, imageCropInfo.fileName)
-      const file = new File([blob], imageCropInfo.fileName, { type: blob.type })
-      handleLocalFileUpload(file)
+      if (imageCropInfo) {
+        const blob = await getCroppedImg(imageCropInfo.tempUrl, imageCropInfo.croppedAreaPixels, imageCropInfo.fileName)
+        const file = new File([blob], imageCropInfo.fileName, { type: blob.type })
+        handleLocalFileUpload(file)
+      }
     }
   }
 
